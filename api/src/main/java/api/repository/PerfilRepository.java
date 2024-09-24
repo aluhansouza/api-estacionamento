@@ -7,5 +7,8 @@ import api.entity.Perfil;
 
 @Repository
 public interface PerfilRepository extends JpaRepository<Perfil, Integer> {
+	
+	
+	
 
 }

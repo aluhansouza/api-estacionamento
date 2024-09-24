@@ -51,7 +51,7 @@ public class Usuario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "perfil_id", referencedColumnName = "id")
 	private Perfil perfil;
-
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
