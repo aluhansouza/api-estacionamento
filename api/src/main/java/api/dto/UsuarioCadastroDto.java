@@ -28,7 +28,7 @@ public class UsuarioCadastroDto {
     private String senha;
 	
 	@NotNull
-    private int perfilId;
+    private int perfil;
 	
 	
 }

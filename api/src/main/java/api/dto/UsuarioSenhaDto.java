@@ -16,15 +16,15 @@ import lombok.ToString;
 public class UsuarioSenhaDto {
 	
 	@NotBlank
-    @Size(min = 8, max = 8)
+    @Size(min = 8, max = 12)
     private String senhaAtual;
 	
 	@NotBlank
-    @Size(min = 8, max = 8)
+    @Size(min = 8, max = 12)
     private String novaSenha;
     
 	@NotBlank
-    @Size(min = 8, max = 8)
+    @Size(min = 8, max = 12)
     private String confirmaSenha;
 	
 	

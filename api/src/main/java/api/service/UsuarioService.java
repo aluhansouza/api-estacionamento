@@ -23,6 +23,7 @@ public class UsuarioService {
 	private final PerfilRepository perfilRepository;
 	private final PasswordEncoder passwordEncoder;
 
+	private Perfil perfil = new Perfil();
 	
 	
 	@Transactional
@@ -30,8 +31,15 @@ public class UsuarioService {
 		try {
 			usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 			
+			
 			Perfil perfil = perfilRepository.findById(perfilId)
 	                .orElseThrow(() -> new RuntimeException("Perfil não encontrado com ID: " + perfilId));
+			
+			
+			//perfil.setId(2);
+			
+			System.out.println("ID PERFIL : "+perfil.getId());
+			System.out.println("NOME PERFIL : "+perfil.getNome());
 			
 			usuario.setPerfil(perfil);
 			
@@ -83,7 +91,7 @@ public class UsuarioService {
 	}
 	*/
 	
-	
+	/*
 	@Transactional(readOnly = true)
 	public Perfil buscarPerfilPorEmail(String email) {
         Perfil perfil = usuarioRepository.findPerfilByEmail(email);
@@ -92,6 +100,22 @@ public class UsuarioService {
         }
         return perfil; // Retorna o nome do perfil
     }
+	*/
+	
+	@Transactional(readOnly = true)
+	public Perfil buscarPerfilPorEmail(String email) {
+	    Usuario usuario = usuarioRepository.findByEmail(email)
+	        .orElseThrow(() -> new RuntimeException("Usuário não encontrado com email: " + email));
+	    
+	    Perfil perfil = usuario.getPerfil();
+	    
+	    if (perfil == null) {
+	        throw new RuntimeException("Perfil não encontrado para o usuário com email: " + email);
+	    }
+	    
+	    return perfil;
+	}
+	
 	
 	public void processarPerfil(String email) {
         Perfil perfil = buscarPerfilPorEmail(email);

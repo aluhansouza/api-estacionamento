@@ -6,7 +6,13 @@ import org.springframework.security.core.userdetails.User;
 
 public class JwtUserDetails extends User {
 
-    private Usuario usuario;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+	private Usuario usuario;
 
     public JwtUserDetails(Usuario usuario) {
         super(usuario.getEmail(), usuario.getSenha(), AuthorityUtils.createAuthorityList(usuario.getPerfil().getNome()));
