@@ -6,12 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import api.entity.Cliente;
 import api.exception.CpfUniqueViolationException;
 import api.exception.EntityNotFoundException;
-import api.repository.projection.ClienteProjection;
-
-import api.entity.Cliente;
 import api.repository.ClienteRepository;
+import api.repository.projection.ClienteProjection;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -47,4 +46,12 @@ public class ClienteService {
     public Cliente buscarPorUsuarioId(Integer id) {
         return clienteRepository.findByUsuarioId(id);
     }
+    
+    @Transactional(readOnly = true)
+    public Cliente buscarPorCpf(String cpf) {
+        return clienteRepository.findByCpf(cpf).orElseThrow(
+                () -> new EntityNotFoundException(String.format("Cliente com CPF '%s' não encontrado", cpf))
+        );
+    }
+    
 }
